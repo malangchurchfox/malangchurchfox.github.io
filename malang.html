@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 맞추기 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>숫자 맞추기 게임</h1>
+    <p>1부터 100까지의 숫자 중 하나를 맞춰 보세요!</p>
+    
+    <input type="number" id="guessInput" min="1" max="100" placeholder="숫자를 입력하세요">
+    <button onclick="checkGuess()">추측하기</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        // 랜덤 숫자 생성
+        const secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('guessInput').value);
+            attempts++;
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                document.getElementById('result').textContent = "1부터 100까지의 숫자를 입력해주세요!";
+                return;
+            }
+
+            if (userGuess === secretNumber) {
+                document.getElementById('result').textContent = `정답! ${attempts}번 만에 맞추셨습니다!`;
+            } else if (userGuess < secretNumber) {
+                document.getElementById('result').textContent = "너무 낮아요. 다시 시도해보세요.";
+            } else {
+                document.getElementById('result').textContent = "너무 높아요. 다시 시도해보세요.";
+            }
+        }
+    </script>
+    
+</body>
+</html>
